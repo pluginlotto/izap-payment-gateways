@@ -44,7 +44,7 @@ function izap_payments_init() {
     }
   }
 
-  if(get_context()=='settings') {
+if (in_array(get_context(), array('settings', 'notifications', 'payment'))) {
     $submenu = array(
                 'pg/'.GLOBAL_IZAP_PAYMENT_PAGEHANDLER.'/choose_gateway/'.get_loggedin_user()->username.'/'=>array('title'=>"izap_payment:choose_gateway", 'admin_only'=>true, 'groupby' => 'all'),
               );
