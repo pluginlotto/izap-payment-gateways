@@ -42,7 +42,8 @@ if($payment_options) {
                    'plugin' => GLOBAL_IZAP_PAYMENT_PLUGIN,
                    'type' => 'images'
                    )) . $gate . '.gif';
-                                                            ?>" alt="<?php echo $gateway_info[$gate]['title']?>" /></a>
+      ?>" alt="<?php echo $gateway_info[$gate]['title']?>"
+      /></a>
         <?php
       }
       ?>
