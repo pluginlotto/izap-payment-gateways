@@ -6,7 +6,6 @@ class IzapPaymentController extends IzapController {
     global $IZAP_PAYMENT_GATEWAYS;
     $this->_page = $page;
     $this->page_elements['filter']=false;
-    $this->page_elements['buttons']=false;
   }
   public function actionChoose_gateway() {
     admin_gatekeeper();
