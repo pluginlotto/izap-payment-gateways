@@ -12,15 +12,18 @@
 * For discussion about corresponding plugins, visit http://www.pluginlotto.com/pg/forums/
 * Follow us on http://facebook.com/PluginLotto and http://twitter.com/PluginLotto
  */
-global $IZAP_PAYMENT_GATEWAYS;
-$gateway = $IZAP_PAYMENT_GATEWAYS->custom['installed_gateways'];
+
+$gateway = func_get_custom_value_byizap(array(
+        'plugin' => GLOBAL_IZAP_PAYMENT_PLUGIN,
+        'var' => 'installed_gateways',
+));
 
 $form = '<fieldset class="payment_fieldset">';
 $form .= '<legend>'.elgg_echo('izap_payment:choose_multiple').'</legend>';
 $form .= elgg_view('input/checkboxes', array(
         'internalname' => 'params[gateway_1]',
         'options' => $gateway['multi'],
-        'value' => explode('|', get_plugin_usersetting('gateway_1', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN)),
+        'value' => explode('|', get_plugin_usersetting('gateway_1', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN)),
 ));
 $form .= '</fieldset><br />';
 
@@ -29,7 +32,7 @@ $form .= '<legend>'.elgg_echo('izap_payment:choose_single').'</legend>';
 $form .= elgg_view('input/radio', array(
         'internalname' => 'params[gateway_2]',
         'options' => $gateway['single'],
-        'value' => get_plugin_usersetting('gateway_2', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
+        'value' => get_plugin_usersetting('gateway_2', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
 ));
 $form .= '</fieldset><br />';
 
@@ -62,8 +65,8 @@ $form .= elgg_view('input/submit', array(
 
 $form = elgg_view('input/form', array(
         'body' => $form,
-        'action' => $vars['url'] . 'action/'.GLOBAL_IZAP_PAYMENT_ACTION.'/choose_gateway',
-));
+        'action' => IzapBase::getFormAction('choose_gateway',GLOBAL_IZAP_PAYMENT_PLUGIN
+                )));
 ?>
 <div class="contentWrapper">
   <?php echo $form;?>
@@ -80,7 +83,7 @@ if($gateway) {
             'content' => $payment_gate->settingForm(),
     );
   }
-  $form = elgg_view(GLOBAL_IZAP_ELGG_BRIDGE.'/views/tabs',array('tabsArray' => $tab_array));
+  $form = izap_elgg_bridge_view('tabs',array('tabsArray' => $tab_array));
   ?>
 <div class="contentWrapper">
     <?php echo $form;?>
