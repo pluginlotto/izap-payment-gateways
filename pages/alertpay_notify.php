@@ -60,9 +60,9 @@ $params['myCustomField_5'] = urldecode($_POST['apc_5']);
 $params['myCustomField_6'] = urldecode($_POST['apc_6']);
 
 $params['user'] = get_user($params['USER_GUID']);
-if($user) {
-  define("IPN_SECURITY_CODE", get_plugin_usersetting('alertpay_IPN_security_code', $user->guid, GLOBAL_IZAP_PAYMENT_PLUGIN));
-  define("MY_MERCHANT_EMAIL", get_plugin_usersetting('alertpay_user_id', $user->guid, GLOBAL_IZAP_PAYMENT_PLUGIN));
+if($params['user']) {
+  define("IPN_SECURITY_CODE", get_plugin_usersetting('alertpay_IPN_security_code', $params['user']->guid, GLOBAL_IZAP_PAYMENT_PLUGIN));
+  define("MY_MERCHANT_EMAIL", get_plugin_usersetting('alertpay_user_id', $params['user']->guid, GLOBAL_IZAP_PAYMENT_PLUGIN));
 }
 
 if ($params['receivedMerchantEmailAddress'] == MY_MERCHANT_EMAIL 
@@ -83,6 +83,7 @@ if ($params['testModeStatus'] == "1") {
   foreach($params as $key => $val) {
     $string .= $key .' = ' . $val . "<br />\n\r";
   }
+  
   func_send_mail_byizap(array(
           'msg' => $string,
           'subject' => 'TEST MAIL FOR: ALERT PAY',
