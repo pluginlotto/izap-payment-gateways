@@ -84,6 +84,71 @@ class alertpay extends gateWayMethods implements paymentGateways {
     );
     $form .= '</label><br />';
     $form .= elgg_echo('izap_payment:alert_url') . ': <i>' . trigger_plugin_hook('alertpay', 'alert_url', null, 'Alert URL not set. Please contact site admnistrator.') . '</i><br />';
+    $form .= '<div class="gateway_help"><a href="#" onclick="$(\'#help_div_alert_pay\').toggle(); return false;">'.elgg_echo('izap_payment:help').'</a>';
+    $form .= '<div style="display: none;" id="help_div_alert_pay">
+                Set your IPN Options in the Alert pay control panel. Once you are done with the values
+                our Plugin will trigger a hook on every success and fail of the IPN validation from the
+                Alertpay.
+                Hooks are:
+                <br />
+                Success: <b>trigger_plugin_hook(\'izap_payment_gateway\', \'IPN_NOTIFY_ALERTPAY:SUCCESS\', $params);</b>
+                <br />
+                Fail: <b>trigger_plugin_hook(\'izap_payment_gateway\', \'IPN_NOTIFY_ALERTPAY:FAIL\', $params);</b>
+<br />
+                Sample Code:
+<br />
+  
+                <pre>
+<b>register_plugin_hook(\'izap_payment_gateway\', \'IPN_NOTIFY_ALERTPAY:SUCCESS\', \'izap_alertpay_process_order\');</b>
+
+<b>register_plugin_hook(\'izap_payment_gateway\', \'IPN_NOTIFY_ALERTPAY:FAIL\', \'izap_alertpay_fail\');</b>
+
+function izap_alertpay_process_order($hook, $entity_type, $returnvalue, $params) {
+  global $IZAP_ECOMMERCE;
+
+  $reference_num = $params[\'transactionReferenceNumber\'];
+  $order_id = $params[\'myCustomField_3\'];
+  $order = get_entity($order_id);
+
+  $main_array[\'confirmed\'] = \'yes\';
+  $main_array[\'payment_transaction_id\'] = $reference_num;
+
+  $provided[\'entity\'] = $order;
+  $provided[\'metadata\'] = $main_array;
+  func_izap_update_metadata($provided);
+
+  // save purchased product info with user
+  save_order_with_user_izap_ecommerce($order);
+
+  IzapEcommerce::sendOrderNotification($order);
+}
+
+function izap_alertpay_fail($hook, $entity_type, $returnvalue, $params) {
+  global $IZAP_ECOMMERCE;
+
+  $order_id = $params[\'myCustomField_3\'];
+  $order = get_entity($order_id);
+
+  $main_array[\'confirmed\'] = \'no\';
+  $main_array[\'error_status\'] = \'Error while Payment\';
+  $main_array[\'error_time\'] = time();
+  $main_array[\'return_response\'] = serialize($params);
+
+  $provided[\'entity\'] = $order;
+  $provided[\'metadata\'] = $main_array;
+  func_izap_update_metadata($provided);
+
+  notify_user(
+          $order->owner_guid,
+          $CONFIG->site->guid,
+          elgg_echo(\'izap-ecommerce:order_processe_error\'),
+          elgg_echo(\'izap-ecommerce:order_processe_error_message\') . $IZAP_ECOMMERCE->link . \'order_detail/\' . $order->guid
+  );
+}
+</pre>
+Code sample taken from the start.php of "izap-ecommerce" plugin.
+              </div></div>';
+
     return $form;
   }
 

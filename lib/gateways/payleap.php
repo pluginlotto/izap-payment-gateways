@@ -168,7 +168,10 @@ class payleap extends gateWayMethods implements paymentGateways {
             )
     );
     $form .= '</label>';
-
+    $form .= '<div class="gateway_help"><a href="#" onclick="$(\'#help_div_payleap\').toggle(); return false;">'.elgg_echo('izap_payment:help').'</a>';
+    $form .= '<div style="display: none;" id="help_div_payleap">
+      Add your login id and password, and you are ready to go.
+              </div></div>';
     return $form;
 
   }

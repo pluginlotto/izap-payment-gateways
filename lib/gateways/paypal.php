@@ -83,7 +83,7 @@ class paypal implements paymentGateways {
     if(!$user_guid) {
       $user_guid = get_loggedin_userid();
     }
-    
+
     if(get_plugin_usersetting('paypal_test_mode', $user_guid, GLOBAL_IZAP_PAYMENT_PLUGIN) == 'yes') {
       $mode = TRUE;
     }
@@ -98,7 +98,7 @@ class paypal implements paymentGateways {
       <h3 align='center'>Processing... Please don't refresh or press back button.</h3>
       </p>";
     echo "<form method=\"post\" name=\"form\" action=\"".$this->paypal_url."\">\n";
-    
+
     foreach ($this->fields as $name => $value) {
       echo "<input type=\"hidden\" name=\"$name\" value=\"$value\">\n";
     }
@@ -263,20 +263,23 @@ class paypal implements paymentGateways {
             )
     );
     $form .= '</label>';
-
+    $form .= '<div class="gateway_help"><a href="#" onclick="$(\'#help_div_paypal\').toggle(); return false;">'.elgg_echo('izap_payment:help').'</a>';
+    $form .= '<div style="display: none;" id="help_div_paypal">
+      Add you paypal account and select the payment mode.
+              </div></div>';
     return $form;
   }
 
   public function inputForm() {
     $form = '';
-    
+
     return $form;
   }
 
   public function getTransactionId() {
     return '';
   }
-  public function getResponse(){
+  public function getResponse() {
     return '';
   }
 }

@@ -68,28 +68,7 @@ if($params['user']) {
 if ($params['receivedMerchantEmailAddress'] == MY_MERCHANT_EMAIL 
         && $params['receivedSecurityCode'] == IPN_SECURITY_CODE
         && $params['transactionStatus'] == "Success") {
-  $params['IT_WORKED'] = 'YES';
   trigger_plugin_hook('izap_payment_gateway', 'IPN_NOTIFY_ALERTPAY:SUCCESS', $params);
 } else {
-  $params['IT_WORKED'] = 'NO';
   trigger_plugin_hook('izap_payment_gateway', 'IPN_NOTIFY_ALERTPAY:FAIL', $params);
 }
-
-// just some test data
-if ($params['testModeStatus'] == "1") {
-  $params['IPN_SECURITY_CODE'] = IPN_SECURITY_CODE;
-  $params['MY_MERCHANT_EMAIL'] = MY_MERCHANT_EMAIL;
-
-  foreach($params as $key => $val) {
-    $string .= $key .' = ' . $val . "<br />\n\r";
-  }
-  
-  func_send_mail_byizap(array(
-          'msg' => $string,
-          'subject' => 'TEST MAIL FOR: ALERT PAY',
-          'from' => 'testAP@izap.in',
-          'from_username' => 'ALERT PAY TEST',
-          'to' => 'chetan@izap.in',
-  ));
-}
-// test data ends

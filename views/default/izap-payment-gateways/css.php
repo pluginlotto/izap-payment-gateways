@@ -34,3 +34,11 @@ border: 4px #A30009 solid;
   font-size: 1.3em;
   color: #0054A7;
 }
+
+.gateway_help {
+background-color: #DEDEDE;
+border: 2px #C1C1C1 solid;
+padding: 10px;
+-moz-border-radius: 8px;
+-webkit-border-radius: 8px;
+}

@@ -186,6 +186,11 @@ class authorize extends gateWayMethods implements paymentGateways {
     );
     $form .= '</label>';
 
+    $form .= '<div class="gateway_help"><a href="#" onclick="$(\'#help_div_authorize\').toggle(); return false;">'.elgg_echo('izap_payment:help').'</a>';
+    $form .= '<div style="display: none;" id="help_div_authorize">
+      Just add your login key and authorization key and select your payment mode. 
+              </div></div>';
+
     return $form;
   }
 }

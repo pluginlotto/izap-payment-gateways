@@ -48,4 +48,6 @@ add_translation('en', array(
   'izap_payment:alertpay_user_id' => 'Alertpay username',
   'izap_payment:alertpay_IPN_security_code' => 'IPN Security Code',
   'izap_payment:alert_url' => 'Your alert url',
+
+  'izap_payment:help' => 'Help',
 ));
