@@ -122,7 +122,7 @@ class authorize extends gateWayMethods implements paymentGateways {
       $this->response['status'] = TRUE;
       $this->response['success_msg'] .= $this->raw_response[3];
     }else {
-      $this->response['status'] = TRUE;
+      $this->response['status'] = FALSE;
       $this->response['error_msg'] .= $this->raw_response[3];
     }
 
