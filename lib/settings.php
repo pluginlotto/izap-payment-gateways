@@ -85,8 +85,8 @@ return array(
                 'custom' => array(
 
                         'installed_gateways' => array(
-                                'multi' => array('paypal'),
-                                'single' => array('payleap', 'authorize', 'alertpay'),
+                                'multi' => array('paypal', 'alertpay'),
+                                'single' => array('payleap', 'authorize', 'none'),
                         ),
 
                         'gateways_info' => array(
