@@ -18,7 +18,7 @@ function func_get_payment_options($user_guid = 0) {
   $gate_2 = func_get_gateway_setting('gateway_2', $user_guid);
 
   if($gate_1 || $gate_2) {
-  $gateways = array_merge((array) $gate_1,(array) $gate_2);
+    $gateways = array_merge((array) $gate_1,(array) $gate_2);
   }
 
   foreach($gateways as $gate) {
@@ -46,12 +46,17 @@ function func_izap_simple_xml_find($haystack, $needle) {
 // supplying a valid closing XML tag in $needle, this will return the data contained by the element
 // the element in question must be a leaf, and not itself contain other elements (this is *simple*_xml_find =)
 
-if(($end = strpos($haystack, $needle)) === FALSE)
-	return("");
+  if(($end = strpos($haystack, $needle)) === FALSE)
+    return("");
 
-for($x = $end; $x > 0; $x--) {
-	if($haystack{$x} == ">")
-		return(trim(substr($haystack, $x + 1, $end - $x - 1)));
-	}
-return ("");
+  for($x = $end; $x > 0; $x--) {
+    if($haystack{$x} == ">")
+      return(trim(substr($haystack, $x + 1, $end - $x - 1)));
+  }
+  return ("");
+}
+
+function izap_alertpay_alert_url() {
+  global $CONFIG;
+  return $CONFIG->wwwroot . 'pg/' . GLOBAL_IZAP_PAYMENT_PAGEHANDLER . '/alertpay_notify/';
 }

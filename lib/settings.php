@@ -62,8 +62,8 @@ return array(
                                         'title' => 'izap_payment:choose_gateway',
                                         'public' => FALSE,
                                         'admin_only' => izap_gatekeeper(array(
-                                          'plugin' => GLOBAL_IZAP_PAYMENT_PLUGIN,
-                                          'return' => TRUE,
+                                        'plugin' => GLOBAL_IZAP_PAYMENT_PLUGIN,
+                                        'return' => TRUE,
                                         )),
                                 ),
                         ),
@@ -74,11 +74,19 @@ return array(
 
                 ),
 
+                'hooks' => array(
+                        'alertpay' => array(
+                                'alert_url' => array(
+                                        'izap_alertpay_alert_url',
+                                )
+                        ),
+                ),
+                
                 'custom' => array(
 
                         'installed_gateways' => array(
                                 'multi' => array('paypal'),
-                                'single' => array('payleap', 'authorize'),
+                                'single' => array('payleap', 'authorize', 'alertpay'),
                         ),
 
                         'gateways_info' => array(
@@ -93,6 +101,10 @@ return array(
 
                                 'authorize' => array(
                                         'title' => 'Credit card',
+                                ),
+
+                                'alertpay' => array(
+                                        'title' => 'Alert pay'
                                 ),
                         ),
                 ),

@@ -44,4 +44,8 @@ add_translation('en', array(
 
   'izap_payment:authorize_login_key' => 'Authorize login key',
   'izap_payment:authorize_authorization_key' => 'Authorize authorization key',
+
+  'izap_payment:alertpay_user_id' => 'Alertpay username',
+  'izap_payment:alertpay_IPN_security_code' => 'IPN Security Code',
+  'izap_payment:alert_url' => 'Your alert url',
 ));
