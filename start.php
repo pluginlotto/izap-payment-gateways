@@ -23,13 +23,13 @@ define('GLOBAL_IZAP_PAYMENT_ACTION', 'izap_payments');
 function izap_payments_init() {
   global $CONFIG, $IZAP_PAYMENT_GATEWAYS;
 
-  if(is_plugin_enabled('izap-elgg-bridge')) {
+  if(elgg_is_active_plugin('izap-elgg-bridge')) {
     izap_plugin_init(GLOBAL_IZAP_PAYMENT_PLUGIN);
   }else {
     register_error(GLOBAL_IZAP_ECOMMERCE_PLUGIN . ' plugin, needs izap-elgg-bridge');
     disable_plugin(GLOBAL_IZAP_ECOMMERCE_PLUGIN);
   }
-  
+
   include_once(dirname(__FILE__) . '/lib/interfaces/paymentGateways.php');
   include_once(dirname(__FILE__) . '/lib/functions/core.php');
 
