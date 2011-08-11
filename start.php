@@ -13,11 +13,10 @@
 * Follow us on http://facebook.com/PluginLotto and http://twitter.com/PluginLotto
 */
 
+//global definitions
 define('GLOBAL_IZAP_PAYMENT_PLUGIN', 'izap-payment-gateways');
-
 define('GLOBAL_IZAP_PAYMENT_PAGEHANDLER', 'payment');
 define('GLOBAL_IZAP_PAYMENT_SUBTYPE', 'izap_payments');
-
 define('GLOBAL_IZAP_PAYMENT_ACTION', 'izap_payments');
 
 function izap_payments_init() {
@@ -44,6 +43,7 @@ function izap_payments_init() {
     }
   }
 
+  //registeration of submenu
 if (in_array(get_context(), array('settings', 'notifications', 'payment'))) {
     $submenu = array(
                 'pg/'.GLOBAL_IZAP_PAYMENT_PAGEHANDLER.'/choose_gateway/'.get_loggedin_user()->username.'/'=>array('title'=>"izap_payment:choose_gateway", 'admin_only'=>true, 'groupby' => 'all'),
@@ -66,6 +66,7 @@ if (in_array(get_context(), array('settings', 'notifications', 'payment'))) {
 
   elgg_register_page_handler(GLOBAL_IZAP_PAYMENT_PAGEHANDLER, GLOBAL_IZAP_PAGEHANDLER);
   elgg_register_plugin_hook_handler('alertpay', 'alert_url', 'izap_alertpay_alert_url');
+  //gateways available
   $IZAP_PAYMENT_GATEWAYS->custom = array(
     'installed_gateways' => array(
       'multi' => array('paypal', 'alertpay'),
@@ -87,7 +88,7 @@ if (in_array(get_context(), array('settings', 'notifications', 'payment'))) {
     )
   );
 }
-register_elgg_event_handler('init', 'system', 'izap_payments_init');
+elgg_register_event_handler('init', 'system', 'izap_payments_init');
 
 // Functions from izap-elgg-bridge 1.7
 function func_array_to_plugin_settings($value) {
