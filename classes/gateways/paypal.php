@@ -241,7 +241,7 @@ class paypal implements paymentGateways {
     $form = '<label>' . elgg_echo('izap_payment:paypal_account');
     $form .= elgg_view('input/text',
             array(
-            'internalname' => 'params[paypal_account]',
+            'name' => 'params[paypal_account]',
             'value' => get_plugin_usersetting('paypal_account', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
             'class' => 'general-text',
             )
@@ -253,7 +253,7 @@ class paypal implements paymentGateways {
     $form .= '<label>' . elgg_echo('izap_payment:test_mode') . '<br />';
     $form .= elgg_view('input/radio',
             array(
-            'internalname' => 'params[paypal_test_mode]',
+            'name' => 'params[paypal_test_mode]',
             'value' => get_plugin_usersetting('paypal_test_mode', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
             'class' => 'general-text',
             'options' => array(

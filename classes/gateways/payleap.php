@@ -83,8 +83,8 @@ class payleap extends gateWayMethods implements paymentGateways {
   public function inputForm() {
     $form = '<label>' . elgg_echo('izap_payment:card_type');
     $form .= '<br />';
-    $form .= elgg_view('input/pulldown', array(
-            'internalname' => 'payleap[card_type]',
+    $form .= elgg_view('input/dropdown', array(
+            'name' => 'payleap[card_type]',
             'options' => array(
                     'Visa',
                     'MasterCard',
@@ -101,7 +101,7 @@ class payleap extends gateWayMethods implements paymentGateways {
     $form .= '<label>' . elgg_echo('izap_payment:card_number');
     $form .= '<br />';
     $form .= elgg_view('input/text', array(
-            'internalname' => 'payleap[card_number]',
+            'name' => 'payleap[card_number]',
     ));
     $form .= '</label>';
     $form .= '<br />';
@@ -109,7 +109,7 @@ class payleap extends gateWayMethods implements paymentGateways {
     $form .= '<label>' . elgg_echo('izap_payment:card_cvv');
     $form .= '<br />';
     $form .= elgg_view('input/text', array(
-            'internalname' => 'payleap[card_cvv_number]',
+            'name' => 'payleap[card_cvv_number]',
     ));
     $form .= '</label>';
     $form .= '<br />';
@@ -118,7 +118,7 @@ class payleap extends gateWayMethods implements paymentGateways {
     $form .= '</label>';
     $form .= '<br />';
     $form .= elgg_view('input/date', array(
-            'internalname' => 'payleap[card_exp_date]',
+            'name' => 'payleap[card_exp_date]',
             'params' => array(
                     'start_year' => date(Y),
             ),
@@ -133,7 +133,7 @@ class payleap extends gateWayMethods implements paymentGateways {
     $form .= '<br />';
     $form .= elgg_view('input/text',
             array(
-            'internalname' => 'params[payleap_user_id]',
+            'name' => 'params[payleap_user_id]',
             'value' => get_plugin_usersetting('payleap_user_id', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
             'class' => 'general-text',
             )
@@ -146,7 +146,7 @@ class payleap extends gateWayMethods implements paymentGateways {
     $form .= '<br />';
     $form .= elgg_view('input/text',
             array(
-            'internalname' => 'params[payleap_user_pass]',
+            'name' => 'params[payleap_user_pass]',
             'value' => get_plugin_usersetting('payleap_user_pass', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
             'class' => 'general-text',
             )
@@ -158,7 +158,7 @@ class payleap extends gateWayMethods implements paymentGateways {
     $form .= '<label>' . elgg_echo('izap_payment:test_mode') . '<br />';
     $form .= elgg_view('input/radio',
             array(
-            'internalname' => 'params[payleap_test_mode]',
+            'name' => 'params[payleap_test_mode]',
             'value' => get_plugin_usersetting('payleap_test_mode', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
             'class' => 'general-text',
             'options' => array(

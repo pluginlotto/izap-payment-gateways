@@ -120,7 +120,7 @@ class IzapPayment {
 
     $form = $this->gateway->settingForm();
     $form .= elgg_view('input/hidden', array(
-            'internalname' => 'params[plugin_name]',
+            'name' => 'params[plugin_name]',
             'value' => GLOBAL_IZAP_PAYMENT_PLUGIN,
     ));
     $form .= elgg_view('input/submit', array(
@@ -141,7 +141,7 @@ class IzapPayment {
     $form = $this->gateway->inputForm();
     
     $form .= elgg_view('input/hidden', array(
-      'internalname' => 'payment_option',
+      'name' => 'payment_option',
       'value' => get_class($this->gateway),
     ));
 

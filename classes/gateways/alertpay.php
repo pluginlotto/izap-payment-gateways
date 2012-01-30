@@ -64,7 +64,7 @@ class alertpay extends gateWayMethods implements paymentGateways {
     $form .= '<br />';
     $form .= elgg_view('input/text',
             array(
-            'internalname' => 'params[alertpay_user_id]',
+            'name' => 'params[alertpay_user_id]',
             'value' => get_plugin_usersetting('alertpay_user_id', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
             'class' => 'general-text',
             )
@@ -77,7 +77,7 @@ class alertpay extends gateWayMethods implements paymentGateways {
     $form .= '<br />';
     $form .= elgg_view('input/text',
             array(
-            'internalname' => 'params[alertpay_IPN_security_code]',
+            'name' => 'params[alertpay_IPN_security_code]',
             'value' => get_plugin_usersetting('alertpay_IPN_security_code', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
             'class' => 'general-text',
             )

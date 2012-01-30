@@ -18,7 +18,7 @@ $gateway = $IZAP_PAYMENT_GATEWAYS->custom['installed_gateways'];
 $form = '<fieldset class="payment_fieldset">';
 $form .= '<legend>'.elgg_echo('izap_payment:choose_multiple').'</legend>';
 $form .= elgg_view('input/checkboxes', array(
-        'internalname' => 'params[gateway_1]',
+        'name' => 'params[gateway_1]',
         'options' => $gateway['multi'],
         'value' => explode('|', get_plugin_usersetting('gateway_1', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN)),
 ));
@@ -27,7 +27,7 @@ $form .= '</fieldset><br />';
 $form .= '<fieldset class="payment_fieldset">';
 $form .= '<legend>'.elgg_echo('izap_payment:choose_single').'</legend>';
 $form .= elgg_view('input/radio', array(
-        'internalname' => 'params[gateway_2]',
+        'name' => 'params[gateway_2]',
         'options' => $gateway['single'],
         'value' => get_plugin_usersetting('gateway_2', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
 ));
@@ -36,7 +36,7 @@ $form .= '</fieldset><br />';
 //$form .= '<fieldset class="payment_fieldset">';
 //$form .= '<legend>'.elgg_echo('izap_payment:bypass_payment').'</legend>';
 //$form .= elgg_view('input/checkboxes', array(
-//        'internalname' => 'params[bypass_payment]',
+//        'name' => 'params[bypass_payment]',
 //        'options' => array(
 //          'yes'
 //        ),
@@ -45,12 +45,12 @@ $form .= '</fieldset><br />';
 //$form .= '</fieldset>';
 
 $form .= elgg_view('input/hidden', array(
-        'internalname' => 'params[plugin_name]',
+        'name' => 'params[plugin_name]',
         'value' => GLOBAL_IZAP_PAYMENT_PLUGIN,
 ));
 
 $form .= elgg_view('input/hidden', array(
-        'internalname' => 'params[default_values]',
+        'name' => 'params[default_values]',
         'value' => serialize(array(
         'gateway_1' => 'none',
         )),
