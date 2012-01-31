@@ -49,9 +49,9 @@ if (in_array(get_context(), array('settings', 'notifications', 'payment'))) {
                 'pg/'.GLOBAL_IZAP_PAYMENT_PAGEHANDLER.'/choose_gateway/'.get_loggedin_user()->username.'/'=>array('title'=>"izap_payment:choose_gateway", 'admin_only'=>true, 'groupby' => 'all'),
               );
     foreach($submenu as $url=>$options) {
-      if( isset($options['public']) && $options['public']==TRUE && !isloggedin() ) {
+      if( isset($options['public']) && $options['public']==TRUE && !elgg_is_logged_in() ) {
         continue;
-      } else if( isset($options['admin_only']) && $options['admin_only']==true && !isadminloggedin() ) {
+      } else if( isset($options['admin_only']) && $options['admin_only']==true && !elgg_is_admin_logged_in() ) {
         continue;
       } else {
         elgg_register_menu_item('page', array(
