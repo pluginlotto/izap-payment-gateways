@@ -81,14 +81,14 @@ class paypal implements paymentGateways {
 
   function submit($user_guid = 0) {
     if(!$user_guid) {
-      $user_guid = get_loggedin_userid();
+      $user_guid = elgg_get_logged_in_user_guid();
     }
 
-    if(get_plugin_usersetting('paypal_test_mode', $user_guid, GLOBAL_IZAP_PAYMENT_PLUGIN) == 'yes') {
+    if(elgg_get_plugin_user_setting('paypal_test_mode', $user_guid, GLOBAL_IZAP_PAYMENT_PLUGIN) == 'yes') {
       $mode = TRUE;
     }
     $this->testMode($mode);
-    $this->fields['business'] = get_plugin_usersetting('paypal_account', $user_guid, GLOBAL_IZAP_PAYMENT_PLUGIN);
+    $this->fields['business'] = elgg_get_plugin_user_setting('paypal_account', $user_guid, GLOBAL_IZAP_PAYMENT_PLUGIN);
 
     echo "<html>\n";
     echo "<head><title>Processing Payment...</title>";
@@ -242,7 +242,7 @@ class paypal implements paymentGateways {
     $form .= elgg_view('input/text',
             array(
             'name' => 'params[paypal_account]',
-            'value' => get_plugin_usersetting('paypal_account', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
+            'value' => elgg_get_plugin_user_setting('paypal_account', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
             'class' => 'general-text',
             )
     );
@@ -254,7 +254,7 @@ class paypal implements paymentGateways {
     $form .= elgg_view('input/radio',
             array(
             'name' => 'params[paypal_test_mode]',
-            'value' => get_plugin_usersetting('paypal_test_mode', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
+            'value' => elgg_get_plugin_user_setting('paypal_test_mode', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
             'class' => 'general-text',
             'options' => array(
                     elgg_echo('izap_payment:yes') => 'yes',

@@ -65,7 +65,7 @@ class alertpay extends gateWayMethods implements paymentGateways {
     $form .= elgg_view('input/text',
             array(
             'name' => 'params[alertpay_user_id]',
-            'value' => get_plugin_usersetting('alertpay_user_id', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
+            'value' => elgg_get_plugin_user_setting('alertpay_user_id', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
             'class' => 'general-text',
             )
     );
@@ -78,12 +78,12 @@ class alertpay extends gateWayMethods implements paymentGateways {
     $form .= elgg_view('input/text',
             array(
             'name' => 'params[alertpay_IPN_security_code]',
-            'value' => get_plugin_usersetting('alertpay_IPN_security_code', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
+            'value' => elgg_get_plugin_user_setting('alertpay_IPN_security_code', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
             'class' => 'general-text',
             )
     );
     $form .= '</label><br />';
-    $form .= elgg_echo('izap_payment:alert_url') . ': <i>' . trigger_plugin_hook('alertpay', 'alert_url', null, 'Alert URL not set. Please contact site admnistrator.') . '</i><br />';
+    $form .= elgg_echo('izap_payment:alert_url') . ': <i>' . elgg_trigger_plugin_hook('alertpay', 'alert_url', null, 'Alert URL not set. Please contact site admnistrator.') . '</i><br />';
     $form .= '<div class="gateway_help"><a href="#" onclick="$(\'#help_div_alert_pay\').toggle(); return false;">'.elgg_echo('izap_payment:help').'</a>';
     $form .= '<div style="display: none;" id="help_div_alert_pay">
                 Set your IPN Options in the Alert pay control panel. Once you are done with the values
@@ -91,9 +91,9 @@ class alertpay extends gateWayMethods implements paymentGateways {
                 Alertpay.
                 Hooks are:
                 <br />
-                Success: <b>trigger_plugin_hook(\'izap_payment_gateway\', \'IPN_NOTIFY_ALERTPAY:SUCCESS\', $params);</b>
+                Success: <b>elgg_trigger_plugin_hook(\'izap_payment_gateway\', \'IPN_NOTIFY_ALERTPAY:SUCCESS\', $params);</b>
                 <br />
-                Fail: <b>trigger_plugin_hook(\'izap_payment_gateway\', \'IPN_NOTIFY_ALERTPAY:FAIL\', $params);</b>
+                Fail: <b>elgg_trigger_plugin_hook(\'izap_payment_gateway\', \'IPN_NOTIFY_ALERTPAY:FAIL\', $params);</b>
 <br />
                 Sample Code:
 <br />
@@ -153,7 +153,7 @@ Code sample taken from the start.php of "izap-ecommerce" plugin.
   }
 
   public function submit($user_guid = 0) {
-    $this->fields['ap_merchant'] = get_plugin_usersetting('alertpay_user_id', $user_guid, GLOBAL_IZAP_PAYMENT_PLUGIN);
+    $this->fields['ap_merchant'] = elgg_get_plugin_user_setting('alertpay_user_id', $user_guid, GLOBAL_IZAP_PAYMENT_PLUGIN);
     $this->fields['apc_1'] = $user_guid; // user guid
 
     echo "<html>\n";

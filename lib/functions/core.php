@@ -32,14 +32,14 @@ function func_get_payment_options($user_guid = 0) {
 
 function func_get_gateway_setting($name, $user_guid = 0) {
   if(!$user_guid) {
-    $user_guid = get_loggedin_userid();
+    $user_guid = elgg_get_logged_in_user_guid();
   }
 
   if(!$user_guid) {
     return FALSE;
   }
 
-  return get_plugin_usersetting($name, $user_guid, GLOBAL_IZAP_PAYMENT_PLUGIN);
+  return elgg_get_plugin_user_setting($name, $user_guid, GLOBAL_IZAP_PAYMENT_PLUGIN);
 }
 
 function func_izap_simple_xml_find($haystack, $needle) {

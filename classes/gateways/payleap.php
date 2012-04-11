@@ -134,7 +134,7 @@ class payleap extends gateWayMethods implements paymentGateways {
     $form .= elgg_view('input/text',
             array(
             'name' => 'params[payleap_user_id]',
-            'value' => get_plugin_usersetting('payleap_user_id', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
+            'value' => elgg_get_plugin_user_setting('payleap_user_id', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
             'class' => 'general-text',
             )
     );
@@ -147,7 +147,7 @@ class payleap extends gateWayMethods implements paymentGateways {
     $form .= elgg_view('input/text',
             array(
             'name' => 'params[payleap_user_pass]',
-            'value' => get_plugin_usersetting('payleap_user_pass', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
+            'value' => elgg_get_plugin_user_setting('payleap_user_pass', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
             'class' => 'general-text',
             )
     );
@@ -159,7 +159,7 @@ class payleap extends gateWayMethods implements paymentGateways {
     $form .= elgg_view('input/radio',
             array(
             'name' => 'params[payleap_test_mode]',
-            'value' => get_plugin_usersetting('payleap_test_mode', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
+            'value' => elgg_get_plugin_user_setting('payleap_test_mode', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
             'class' => 'general-text',
             'options' => array(
                     elgg_echo('izap_payment:yes') => 'yes',

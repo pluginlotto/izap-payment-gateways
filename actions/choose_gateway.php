@@ -25,7 +25,7 @@ foreach($posted_values as $key => $value) {
     set_plugin_usersetting(
             $key,
             func_array_to_plugin_settings($value),
-            get_loggedin_userid(),
+            elgg_get_logged_in_user_guid(),
             GLOBAL_IZAP_PAYMENT_PLUGIN
     );
   }
