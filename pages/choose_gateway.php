@@ -16,7 +16,6 @@
 izap_gatekeeper(array('plugin' => GLOBAL_IZAP_PAYMENT_PLUGIN));
 set_context('settings');
 $title = elgg_echo('izap_payment:choose_gateway');
-
 $body = elgg_view_layout(
         'two_column_left_sidebar','', elgg_view_title($title) .
         func_izap_bridge_view(

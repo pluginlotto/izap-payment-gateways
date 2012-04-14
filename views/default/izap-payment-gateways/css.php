@@ -16,11 +16,23 @@
 ?>
 
 .choose_payment_options a.payment_option_link img{
-border: 0px;
+border: px;
 }
 
 .choose_payment_options a.selected img{
-border: 4px #A30009 solid;
+border:nonel;
+border-radius: 10px;
+-moz-border-radius: 10px;
+-o-border-radius: 10px;
+-webkit-border-radius: 10px;
+float: right;
+}
+.choose_payment_options a.selected img:hover{
+border: 2px grey solid;
+border-radius: 10px;
+-moz-border-radius: 10px;
+-o-border-radius: 10px;
+-webkit-border-radius: 10px;
 }
 
 .payment_fieldset {
@@ -39,6 +51,36 @@ border: 4px #A30009 solid;
 background-color: #DEDEDE;
 border: 2px #C1C1C1 solid;
 padding: 10px;
+border-radius: 8px;
 -moz-border-radius: 8px;
 -webkit-border-radius: 8px;
+}
+******************* Additional CSS *****************
+
+.payment_method_list ul{
+list-style: none;
+ width: auto;
+ height: 30px;
+
+}
+.payment_method_list li {
+  list-style: none;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 3px;
+  padding: 3px;
+  text-align: right;
+  border-radius: 8px;
+  background-color:  #eeeeee;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -o-border-radius: 8px;
+  }
+ 
+ .payment_method_list li:hover {
+  background-color: #DADAD4;
+ }
+
+.clear{
+clear: both;
 }

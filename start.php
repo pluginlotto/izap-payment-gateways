@@ -36,7 +36,7 @@ function izap_payments_init() {
   $actions_arr = array(
       'admin' => array(
           GLOBAL_IZAP_PAYMENT_ACTION . '/choose_gateway' => "choose_gateway.php"
-      ));
+          ));
   foreach ($actions_arr as $access_id => $actions) {
     foreach ($actions as $action => $filename) {
       elgg_register_action($action, $CONFIG->pluginspath . GLOBAL_IZAP_PAYMENT_PLUGIN . '/actions/' . $filename, $access_id);

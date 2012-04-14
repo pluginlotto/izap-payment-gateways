@@ -12,17 +12,17 @@
  * For discussion about corresponding plugins, visit http://www.pluginlotto.com/pg/forums/
  * Follow us on http://facebook.com/PluginLotto and http://twitter.com/PluginLotto
  */
+
 global $IZAP_PAYMENT_GATEWAYS;
 $gateway = $IZAP_PAYMENT_GATEWAYS->custom['installed_gateways'];
-foreach($gateway['multi'] as $payment_gate) {
+foreach ($gateway['multi'] as $payment_gate) {
   $checkbox_array[$payment_gate] = $payment_gate;
 }
-
-foreach($gateway['single'] as $payment_gate1) {
-  $radio_array[$payment_gate1] = $payment_gate1;  
+foreach ($gateway['single'] as $payment_gate1) {
+  $radio_array[$payment_gate1] = $payment_gate1;
 }
 
-$form = '<fieldset class="payment_fieldset">';
+$form .= '<fieldset class="payment_fieldset">';
 $form .= '<legend>' . elgg_echo('izap_payment:choose_multiple') . '</legend>';
 $form .= elgg_view('input/checkboxes', array(
     'name' => 'params[gateway_1]',
@@ -51,14 +51,14 @@ $form .= elgg_view('input/hidden', array(
         'gateway_1' => 'none',
     )),
         ));
-
+$form .= elgg_view('input/securitytoken');
 $form .= elgg_view('input/submit', array(
     'value' => elgg_echo('izap_payment:submit'),
         ));
 
 $form = elgg_view('input/form', array(
     'body' => $form,
-    'action' => $vars['url'] . 'action/' . GLOBAL_IZAP_PAYMENT_ACTION . '/choose_gateway',
+    'action' => $vars['url'] . '/action/' . GLOBAL_IZAP_PAYMENT_ACTION . '/choose_gateway',
         ));
 ?>
 <div class="contentWrapper">

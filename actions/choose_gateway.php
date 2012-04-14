@@ -14,7 +14,6 @@
  */
 
 global $CONFIG;
-
 array_walk_recursive($_POST['params'], 'get_input');
 $posted_values = $_POST['params'];
 $default_values = unserialize($posted_values['default_values']);
@@ -30,6 +29,6 @@ foreach($posted_values as $key => $value) {
     );
   }
 }
-system_message(elggb_echo('settings_saved'));
+system_message(elgg_echo('settings_saved'));
 forward($_SERVER['HTTP_REFERER']);
 exit;

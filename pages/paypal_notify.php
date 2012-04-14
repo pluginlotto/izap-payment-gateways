@@ -13,3 +13,4 @@
 * Follow us on http://facebook.com/PluginLotto and http://twitter.com/PluginLotto
 */
 
+echo "hk";

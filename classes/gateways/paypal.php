@@ -45,7 +45,7 @@ class paypal implements paymentGateways {
     $this->ipn_posted_vars = '';
   }
 
-  public function testMode($test_mode = FALSE) {
+  public function testMode($test_mode = false) {
     if($test_mode) {
       $this->paypal_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
       $this->debug = true;
@@ -85,7 +85,7 @@ class paypal implements paymentGateways {
     }
 
     if(elgg_get_plugin_user_setting('paypal_test_mode', $user_guid, GLOBAL_IZAP_PAYMENT_PLUGIN) == 'yes') {
-      $mode = TRUE;
+      $mode = true;
     }
     $this->testMode($mode);
     $this->fields['business'] = elgg_get_plugin_user_setting('paypal_account', $user_guid, GLOBAL_IZAP_PAYMENT_PLUGIN);
@@ -106,7 +106,7 @@ class paypal implements paymentGateways {
     echo "</form>\n";
     echo "</body></html>\n";
 
-    return TRUE;
+    return true;
 
   }
 
@@ -201,8 +201,6 @@ class paypal implements paymentGateways {
       $text .= "$key=$value, ";
       $this->ipn_posted_vars .= $key.'='.$value."<br>";
     }
-
-
 
     // Log the response from the paypal server
     $text .= "\nIPN Response from Paypal Server:\n ".$this->ipn_response;

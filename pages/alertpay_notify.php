@@ -13,7 +13,6 @@
 * Follow us on http://facebook.com/PluginLotto and http://twitter.com/PluginLotto
  */
 
-
 //Setting information about the transaction
 $params['receivedSecurityCode'] = urldecode($_POST['ap_securitycode']);
 $params['receivedMerchantEmailAddress'] = urldecode($_POST['ap_merchant']);

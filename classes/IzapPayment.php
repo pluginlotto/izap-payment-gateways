@@ -17,7 +17,7 @@ class IzapPayment {
 
   public $gateway_path;
   private $gateway;
-  private $debug_mode = FALSE;
+  private $debug_mode = false;
 
   private $return_msg = array();
 
@@ -46,12 +46,12 @@ class IzapPayment {
 
   public function setParams($array) {
     if($this->hasError()) {
-      return FALSE;
+      return false;
     }
 
     if(empty ($array)) {
       $this->addError(elgg_echo('izap_payment:empty_param'));
-      return FALSE;
+      return false;
     }
 
     if(!is_array($array)) {
@@ -63,15 +63,15 @@ class IzapPayment {
 
   public function process($user_guid = 0) {
     if($this->hasError()) {
-      return FALSE;
+      return false;
     }
 
     return $this->gateway->submit($user_guid);
   }
 
-  public function validate($debug = FALSE) {
+  public function validate($debug = false) {
     if($this->hasError()) {
-      return FALSE;
+      return false;
     }
 
     return $this->gateway->validate($debug);
@@ -79,7 +79,7 @@ class IzapPayment {
 
   public function getResponse() {
     if($this->hasError()) {
-      return FALSE;
+      return false;
     }
 
     return $this->gateway->getResponse();
@@ -87,7 +87,7 @@ class IzapPayment {
 
   public function getTransactionId() {
     if($this->hasError()) {
-      return FALSE;
+      return false;
     }
 
     return $this->gateway->getTransactionId();
@@ -99,15 +99,15 @@ class IzapPayment {
 
   private function addMsg($msg) {
     if( !empty ($msg)) {
-      $this->return_msg['SUCCESS'] = TRUE;
+      $this->return_msg['SUCCESS'] = true;
       $this->return_msg['error_msg'][] = $msg;
     }
   }
 
   private function addError($error) {
     if( !empty ($error)) {
-      $this->return_msg['ERROR'] = TRUE;
-      $this->return_msg['SUCCESS'] = FALSE;
+      $this->return_msg['ERROR'] = true;
+      $this->return_msg['SUCCESS'] = false;
       $this->return_msg['error_msg'][] = $error;
     }
   }
@@ -117,7 +117,7 @@ class IzapPayment {
     if($this->hasError()) {
       return elgg_echo('izap_payment:method_not_supported');
     }
-
+    
     $form = $this->gateway->settingForm();
     $form .= elgg_view('input/hidden', array(
             'name' => 'params[plugin_name]',
@@ -143,9 +143,7 @@ class IzapPayment {
     $form .= elgg_view('input/hidden', array(
       'name' => 'payment_option',
       'value' => get_class($this->gateway),
-    ));
-
-    
+    ));  
     return $form;
   }
 

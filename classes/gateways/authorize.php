@@ -58,8 +58,6 @@ class authorize extends gateWayMethods implements paymentGateways {
     $this->setParams($options);
 
     unset($this->data['items'], $this->data['grandTotal'], $this->data['custom']);
-//    C($this->arrayToPostString($this->data));
-//    C($this->authorize_url);EXIT;
     $this->raw_response = $this->sendRequest($this->arrayToPostString($this->data), $this->authorize_url);
 
     return $this->validate();
