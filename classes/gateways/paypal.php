@@ -269,10 +269,8 @@ class paypal implements paymentGateways {
   }
 
   public function inputForm() {
-    $form = '';
-
-    return $form;
-  }
+          ;
+    }
 
   public function getTransactionId() {
     return '';

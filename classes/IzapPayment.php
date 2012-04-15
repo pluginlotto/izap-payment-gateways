@@ -143,7 +143,7 @@ class IzapPayment {
     $form .= elgg_view('input/hidden', array(
       'name' => 'payment_option',
       'value' => get_class($this->gateway),
-    ));  
+    ));
     return $form;
   }
 

@@ -1,27 +1,27 @@
 <?php
-/**************************************************
-* PluginLotto.com                                 *
-* Copyrights (c) 2005-2010. iZAP                  *
-* All rights reserved                             *
-***************************************************
-* @author iZAP Team "<support@izap.in>"
-* @link http://www.izap.in/
-* @version 1.0
-* Under this agreement, No one has rights to sell this script further.
-* For more information. Contact "Tarun Jangra<tarun@izap.in>"
-* For discussion about corresponding plugins, visit http://www.pluginlotto.com/pg/forums/
-* Follow us on http://facebook.com/PluginLotto and http://twitter.com/PluginLotto
+
+/* * ************************************************
+ * PluginLotto.com                                 *
+ * Copyrights (c) 2005-2010. iZAP                  *
+ * All rights reserved                             *
+ * **************************************************
+ * @author iZAP Team "<support@izap.in>"
+ * @link http://www.izap.in/
+ * @version 1.0
+ * Under this agreement, No one has rights to sell this script further.
+ * For more information. Contact "Tarun Jangra<tarun@izap.in>"
+ * For discussion about corresponding plugins, visit http://www.pluginlotto.com/pg/forums/
+ * Follow us on http://facebook.com/PluginLotto and http://twitter.com/PluginLotto
  */
 
 class alertpay extends gateWayMethods implements paymentGateways {
-  public $form_post_url;
 
+  public $form_post_url;
   private $fields = array();
   private $debug;
 
   public function __construct() {
     $this->form_post_url = 'https://www.alertpay.com/PayProcess.aspx';
-
   }
 
   public function getResponse() {
@@ -38,35 +38,34 @@ class alertpay extends gateWayMethods implements paymentGateways {
 
   public function setParams($array) {
     $default = array(
-            'ap_purchasetype' => 'item-goods',
-            'ap_cancelurl' => $_SERVER['HTTP_REFERER'],
-            'ap_currency' => 'USD',
+        'ap_purchasetype' => 'item-goods',
+        'ap_cancelurl' => $_SERVER['HTTP_REFERER'],
+        'ap_currency' => 'USD',
     );
     $options = array_merge($default, $array);
 
-    foreach($options as $field => $value) {
-      if($field == 'items') {
-        foreach($value as $key => $product) {
+    foreach ($options as $field => $value) {
+      if ($field == 'items') {
+        foreach ($value as $key => $product) {
           $this->fields['ap_itemname_' . $key] = $product['name'];
           $this->fields['ap_amount_' . $key] = $product['amount'];
           $this->fields['ap_quantity_' . $key] = 1;
         }
         $this->fields['apc_2'] = count($value); // total products
-      }else {
+      } else {
         $this->fields["$field"] = $value;
       }
     }
-    $this->fields['apc_3'] = $array['custom'];// order id
+    $this->fields['apc_3'] = $array['custom']; // order id
   }
 
   public function settingForm() {
     $form = '<label>' . elgg_echo('izap_payment:alertpay_user_id');
     $form .= '<br />';
-    $form .= elgg_view('input/text',
-            array(
-            'name' => 'params[alertpay_user_id]',
-            'value' => elgg_get_plugin_user_setting('alertpay_user_id', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
-            'class' => 'general-text',
+    $form .= elgg_view('input/text', array(
+        'name' => 'params[alertpay_user_id]',
+        'value' => elgg_get_plugin_user_setting('alertpay_user_id', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
+        'class' => 'general-text',
             )
     );
     $form .= '</label>';
@@ -75,16 +74,15 @@ class alertpay extends gateWayMethods implements paymentGateways {
 
     $form .= '<label>' . elgg_echo('izap_payment:alertpay_IPN_security_code');
     $form .= '<br />';
-    $form .= elgg_view('input/text',
-            array(
-            'name' => 'params[alertpay_IPN_security_code]',
-            'value' => elgg_get_plugin_user_setting('alertpay_IPN_security_code', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
-            'class' => 'general-text',
+    $form .= elgg_view('input/text', array(
+        'name' => 'params[alertpay_IPN_security_code]',
+        'value' => elgg_get_plugin_user_setting('alertpay_IPN_security_code', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
+        'class' => 'general-text',
             )
     );
     $form .= '</label><br />';
     $form .= elgg_echo('izap_payment:alert_url') . ': <i>' . elgg_trigger_plugin_hook('alertpay', 'alert_url', null, 'Alert URL not set. Please contact site admnistrator.') . '</i><br />';
-    $form .= '<div class="gateway_help"><a href="#" onclick="$(\'#help_div_alert_pay\').toggle(); return false;">'.elgg_echo('izap_payment:help').'</a>';
+    $form .= '<div class="gateway_help"><a href="#" onclick="$(\'#help_div_alert_pay\').toggle(); return false;">' . elgg_echo('izap_payment:help') . '</a>';
     $form .= '<div style="display: none;" id="help_div_alert_pay">
                 Set your IPN Options in the Alert pay control panel. Once you are done with the values
                 our Plugin will trigger a hook on every success and fail of the IPN validation from the
@@ -163,7 +161,7 @@ Code sample taken from the start.php of "izap-ecommerce" plugin.
     echo "<p align=\"center\"><img src=\"https://www.alertpay.com/images/AlertPay_accepted_295x43_green.png\"><br />
       <h3 align='center'>Processing... Please don't refresh or press back button.</h3>
       </p>";
-    echo "<form method=\"post\" name=\"form\" action=\"".$this->form_post_url."\">\n";
+    echo "<form method=\"post\" name=\"form\" action=\"" . $this->form_post_url . "\">\n";
 
     foreach ($this->fields as $name => $value) {
       echo "<input type=\"hidden\" name=\"$name\" value=\"$value\">\n";
@@ -178,6 +176,6 @@ Code sample taken from the start.php of "izap-ecommerce" plugin.
   public function validate() {
     ;
   }
-}
 
+}
 

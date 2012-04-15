@@ -36,7 +36,7 @@ function func_get_gateway_setting($name, $user_guid = 0) {
   }
 
   if(!$user_guid) {
-    return FALSE;
+    return false;
   }
 
   return elgg_get_plugin_user_setting($name, $user_guid, GLOBAL_IZAP_PAYMENT_PLUGIN);
@@ -46,7 +46,7 @@ function func_izap_simple_xml_find($haystack, $needle) {
 // supplying a valid closing XML tag in $needle, this will return the data contained by the element
 // the element in question must be a leaf, and not itself contain other elements (this is *simple*_xml_find =)
 
-  if(($end = strpos($haystack, $needle)) === FALSE)
+  if(($end = strpos($haystack, $needle)) === false)
     return("");
 
   for($x = $end; $x > 0; $x--) {
