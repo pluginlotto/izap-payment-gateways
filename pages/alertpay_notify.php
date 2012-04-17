@@ -1,16 +1,17 @@
 <?php
-/**************************************************
-* PluginLotto.com                 *
-* Copyrights (c) 2005-2010. iZAP         *
-* All rights reserved               *
-***************************************************
-* @author iZAP Team "<support@izap.in>"
-* @link http://www.izap.in/
-* @version 1.0
-* Under this agreement, No one has rights to sell this script further.
-* For more information. Contact "Tarun Jangra<tarun@izap.in>"
-* For discussion about corresponding plugins, visit http://www.pluginlotto.com/pg/forums/
-* Follow us on http://facebook.com/PluginLotto and http://twitter.com/PluginLotto
+
+/* * ************************************************
+ * PluginLotto.com                 *
+ * Copyrights (c) 2005-2010. iZAP         *
+ * All rights reserved               *
+ * **************************************************
+ * @author iZAP Team "<support@izap.in>"
+ * @link http://www.izap.in/
+ * @version 1.0
+ * Under this agreement, No one has rights to sell this script further.
+ * For more information. Contact "Tarun Jangra<tarun@izap.in>"
+ * For discussion about corresponding plugins, visit http://www.pluginlotto.com/pg/forums/
+ * Follow us on http://facebook.com/PluginLotto and http://twitter.com/PluginLotto
  */
 
 //Setting information about the transaction
@@ -59,12 +60,12 @@ $params['myCustomField_5'] = urldecode($_POST['apc_5']);
 $params['myCustomField_6'] = urldecode($_POST['apc_6']);
 
 $params['user'] = get_user($params['USER_GUID']);
-if($params['user']) {
+if ($params['user']) {
   define("IPN_SECURITY_CODE", get_plugin_usersetting('alertpay_IPN_security_code', $params['user']->guid, GLOBAL_IZAP_PAYMENT_PLUGIN));
   define("MY_MERCHANT_EMAIL", get_plugin_usersetting('alertpay_user_id', $params['user']->guid, GLOBAL_IZAP_PAYMENT_PLUGIN));
 }
 
-if ($params['receivedMerchantEmailAddress'] == MY_MERCHANT_EMAIL 
+if ($params['receivedMerchantEmailAddress'] == MY_MERCHANT_EMAIL
         && $params['receivedSecurityCode'] == IPN_SECURITY_CODE
         && $params['transactionStatus'] == "Success") {
   trigger_plugin_hook('izap_payment_gateway', 'IPN_NOTIFY_ALERTPAY:SUCCESS', $params);

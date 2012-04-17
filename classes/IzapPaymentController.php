@@ -25,6 +25,9 @@ class IzapPaymentController extends IzapController {
     $this->page_elements['filter'] = false;
   }
 
+  /**
+   * selecting the payment gateway
+   */
   public function actionChoose_gateway() {
     admin_gatekeeper();
     set_context('settings');
@@ -33,6 +36,9 @@ class IzapPaymentController extends IzapController {
     $this->drawPage();
   }
 
+  /**
+   * loads the input form for selecting the gateway
+   */
   public function actionLoad_input_form() {
     $payment = new IzapPayment($this->url_vars[2]);
     echo $payment->inputForm();

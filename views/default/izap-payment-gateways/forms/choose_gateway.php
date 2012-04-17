@@ -13,6 +13,9 @@
  * Follow us on http://facebook.com/PluginLotto and http://twitter.com/PluginLotto
  */
 
+// this page displays the selection of gateways in the settings
+// only Site Admin will have this option
+// display comes in the admin profile only
 global $IZAP_PAYMENT_GATEWAYS;
 $gateway = $IZAP_PAYMENT_GATEWAYS->custom['installed_gateways'];
 foreach ($gateway['multi'] as $payment_gate) {

@@ -12,6 +12,8 @@
  * For discussion about corresponding plugins, visit http://www.pluginlotto.com/pg/forums/
  * Follow us on http://facebook.com/PluginLotto and http://twitter.com/PluginLotto
  */
+
+//this page displays the list of selected payment gateways 
 global $IZAP_PAYMENT_GATEWAYS;
 $payment_options = func_get_payment_options($vars['user_guid']);
 $gateway_info = $IZAP_PAYMENT_GATEWAYS->gateways_info;
@@ -24,15 +26,15 @@ if ($payment_options) {
       foreach ($payment_options as $key => $gate) {
         $option_url = $vars['url'] . GLOBAL_IZAP_PAYMENT_PAGEHANDLER . '/load_input_form/' . elgg_get_page_owner_entity()->username . '/' . $gate;
         ?>
-            <!--  <a href="<?php //echo $option_url           ?>"
-              class="payment_option_link <?php // echo $class;           ?>"
-              title="<?php //echo $gateway_info[$gate]['title']           ?>"
-              ><img src="<?php //echo $vars['url'].'mod/'.GLOBAL_IZAP_PAYMENT_PLUGIN.'/_graphics/'.$gate.'.gif';           ?>" alt="<?php // echo $gateway_info[$gate]['title']           ?>"
-              /></a>-->
+                  <!--  <a href="<?php //echo $option_url                 ?>"
+                    class="payment_option_link <?php // echo $class;                 ?>"
+                     title="<?php //echo $gateway_info[$gate]['title']                 ?>"
+                      ><img src="<?php //echo $vars['url'].'mod/'.GLOBAL_IZAP_PAYMENT_PLUGIN.'/_graphics/'.$gate.'.gif';                 ?>" alt="<?php // echo $gateway_info[$gate]['title']                 ?>"
+                       /></a>-->
 
 
         <a href="<?php echo $option_url ?>"class="payment_option_link<?php echo $class; ?>"title="<?php echo $gateway_info[$gate]['title'] ?>">
-          <li class="payment_method_list">
+          <li class="payment_method_list">  
             <img src="<?php echo $vars['url'] . 'mod/' . GLOBAL_IZAP_PAYMENT_PLUGIN . '/_graphics/' . $gate . '.png'; ?>" alt="<?php echo $gateway_info['$gate']['title'] ?>"/>
           </li>
         </a>
@@ -47,8 +49,9 @@ if ($payment_options) {
     $(document).ready(function() {
       $('.payment_option_link').click(function () {
         $('.payment_option_link').removeClass('selected');
+        $('.payment_option_link').is(':checked'); 
         $(this).addClass('selected');
-        $('#payment_option_from').html('<?php echo elgg_echo('izap_payment:loading')  ?>');
+        $('#payment_option_from').html('<?php echo elgg_echo('izap_payment:loading') ?>');
         $('#payment_option_from').load(this.href);
         return false;
       });

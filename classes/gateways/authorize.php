@@ -32,12 +32,22 @@ class authorize extends gateWayMethods implements paymentGateways {
     $this->data['x_Method'] = 'CC';
   }
 
+  /**
+   *
+   * @param type $array 
+   */
+  
   public function setParams($array) {
     foreach ($array as $key => $val) {
       $this->data[$key] = $val;
     }
   }
 
+  /**
+   *
+   * @param type $user_guid
+   * @return type function
+   */
   public function submit($user_guid = 0) {
     if (func_get_gateway_setting('authorize_test_mode', $user_guid) == 'yes') {
       $this->authorize_url = 'https://test.authorize.net/gateway/transact.dll';
@@ -63,10 +73,18 @@ class authorize extends gateWayMethods implements paymentGateways {
     return $this->validate();
   }
 
+  /**
+   *
+   * @return type variable
+   */
   public function getResponse() {
     return $this->response;
   }
 
+  /**
+   *
+   * @return type array
+   */
   public function getTransactionId() {
     return $this->raw_response[6];
   }
