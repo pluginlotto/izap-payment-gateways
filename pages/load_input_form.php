@@ -14,6 +14,8 @@
  * Follow us on http://facebook.com/PluginLotto and http://twitter.com/PluginLotto
  */
 
+// this page loads the form for gateway selection
+//this actually calls the inputForm function in the izapPayment class
 $query = func_get_query_params_byizap();
 $payment = new IzapPayment($query[1]);
 echo $payment->inputForm();

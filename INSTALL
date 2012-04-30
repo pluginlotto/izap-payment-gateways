@@ -1,0 +1,13 @@
+Izap-payment-gateways
+------------------------
+
+### Installation instructions
+
+1. Grab izap-forum plugin from http://www.pluginlotto.com.
+2. Uncompress downloaded folder with the name "izap-payment-gateways"
+3. Move that to mod.
+4. Go to admin panel, find plugin and click "Activate" button.
+5. Set the gateway settings from the site's setting menu.
+6. Save those settings.
+7. Now go to the admin panel, set the plugin data-access permission and here you go.
+
