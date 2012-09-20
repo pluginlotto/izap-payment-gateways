@@ -31,7 +31,7 @@
     <priority>after</priority>
   </requires>
 
-	<!-- The path is relative to the plugin's root. -->
+  <!-- The path is relative to the plugin's root. -->
 	<screenshot>
 		<description>Sample image</description>
 		<path>screenshots/1.jpg</path>
