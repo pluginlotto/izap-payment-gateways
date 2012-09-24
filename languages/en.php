@@ -23,7 +23,7 @@ add_translation('en', array(
   'izap_payment:gateways_settings' => 'Settings',
   'izap_payment:method_not_supported' => 'This payment method is not supported yet',
 
-  'izap_payment:loading' => 'Click Pay Now',
+  'izap_payment:loading' => 'Loading ....',
 
   'izap_payment:choose_multiple' => 'Choose multiple',
   'izap_payment:choose_single' => 'Choose single',

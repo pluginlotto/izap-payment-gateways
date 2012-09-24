@@ -32,22 +32,12 @@ class authorize extends gateWayMethods implements paymentGateways {
     $this->data['x_Method'] = 'CC';
   }
 
-  /**
-   *
-   * @param type $array 
-   */
-  
   public function setParams($array) {
     foreach ($array as $key => $val) {
       $this->data[$key] = $val;
     }
   }
 
-  /**
-   *
-   * @param type $user_guid
-   * @return type function
-   */
   public function submit($user_guid = 0) {
     if (func_get_gateway_setting('authorize_test_mode', $user_guid) == 'yes') {
       $this->authorize_url = 'https://test.authorize.net/gateway/transact.dll';
@@ -68,23 +58,17 @@ class authorize extends gateWayMethods implements paymentGateways {
     $this->setParams($options);
 
     unset($this->data['items'], $this->data['grandTotal'], $this->data['custom']);
+//    C($this->arrayToPostString($this->data));
+//    C($this->authorize_url);EXIT;
     $this->raw_response = $this->sendRequest($this->arrayToPostString($this->data), $this->authorize_url);
 
     return $this->validate();
   }
 
-  /**
-   *
-   * @return type variable
-   */
   public function getResponse() {
     return $this->response;
   }
 
-  /**
-   *
-   * @return type array
-   */
   public function getTransactionId() {
     return $this->raw_response[6];
   }
@@ -93,12 +77,12 @@ class authorize extends gateWayMethods implements paymentGateways {
     $form = '<label>' . elgg_echo('izap_payment:card_type');
     $form .= '<br />';
     $form .= elgg_view('input/dropdown', array(
-        'name' => 'authorize[card_type]',
-        'options' => array(
-            'Visa',
-            'MasterCard',
-            'American Express',
-        ),
+                'name' => 'authorize[card_type]',
+                'options' => array(
+                    'Visa',
+                    'MasterCard',
+                    'American Express',
+                ),
             ));
     $form .= '</label>';
     $form .= '<br />';
@@ -106,7 +90,7 @@ class authorize extends gateWayMethods implements paymentGateways {
     $form .= '<label>' . elgg_echo('izap_payment:card_number');
     $form .= '<br />';
     $form .= elgg_view('input/text', array(
-        'name' => 'authorize[card_number]',
+                'name' => 'authorize[card_number]',
             ));
     $form .= '</label>';
     $form .= '<br />';
@@ -114,7 +98,7 @@ class authorize extends gateWayMethods implements paymentGateways {
     $form .= '<label>' . elgg_echo('izap_payment:card_cvv');
     $form .= '<br />';
     $form .= elgg_view('input/text', array(
-        'name' => 'authorize[card_cvv_number]',
+                'name' => 'authorize[card_cvv_number]',
             ));
     $form .= '</label>';
     $form .= '<br />';
@@ -123,10 +107,10 @@ class authorize extends gateWayMethods implements paymentGateways {
     $form .= '</label>';
     $form .= '<br />';
     $form .= elgg_view('input/date', array(
-        'name' => 'authorize[card_exp_date]',
-        'params' => array(
-            'start_year' => date(Y),
-        ),
+                'name' => 'authorize[card_exp_date]',
+                'params' => array(
+                    'start_year' => date(Y),
+                ),
             ));
     $form .= '<br />';
 
@@ -166,11 +150,12 @@ class authorize extends gateWayMethods implements paymentGateways {
   public function settingForm() {
     $form = '<label>' . elgg_echo('izap_payment:authorize_login_key');
     $form .= '<br />';
-    $form .= elgg_view('input/text', array(
-        'name' => 'params[authorize_login_key]',
-        'value' => elgg_get_plugin_user_setting('authorize_login_key', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
-        'class' => 'general-text',
-            )
+    $form .= elgg_view('input/text',
+                    array(
+                        'name' => 'params[authorize_login_key]',
+                        'value' => get_plugin_usersetting('authorize_login_key', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
+                        'class' => 'general-text',
+                    )
     );
     $form .= '</label>';
 
@@ -178,26 +163,28 @@ class authorize extends gateWayMethods implements paymentGateways {
 
     $form .= '<label>' . elgg_echo('izap_payment:authorize_authorization_key');
     $form .= '<br />';
-    $form .= elgg_view('input/text', array(
-        'name' => 'params[authorize_authorization_key]',
-        'value' => elgg_get_plugin_user_setting('authorize_authorization_key', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
-        'class' => 'general-text',
-            )
+    $form .= elgg_view('input/text',
+                    array(
+                        'name' => 'params[authorize_authorization_key]',
+                        'value' => get_plugin_usersetting('authorize_authorization_key', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
+                        'class' => 'general-text',
+                    )
     );
     $form .= '</label>';
 
     $form .= '<br />';
 
     $form .= '<label>' . elgg_echo('izap_payment:test_mode') . '<br />';
-    $form .= elgg_view('input/radio', array(
-        'name' => 'params[authorize_test_mode]',
-        'value' => elgg_get_plugin_user_setting('authorize_test_mode', elgg_get_logged_in_user_guid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
-        'class' => 'general-text',
-        'options' => array(
-            elgg_echo('izap_payment:yes') => 'yes',
-            elgg_echo('izap_payment:no') => 'no',
-        ),
-            )
+    $form .= elgg_view('input/radio',
+                    array(
+                        'name' => 'params[authorize_test_mode]',
+                        'value' => get_plugin_usersetting('authorize_test_mode', get_loggedin_userid(), GLOBAL_IZAP_PAYMENT_PLUGIN),
+                        'class' => 'general-text',
+                        'options' => array(
+                            elgg_echo('izap_payment:yes') => 'yes',
+                            elgg_echo('izap_payment:no') => 'no',
+                        ),
+                    )
     );
     $form .= '</label>';
 
