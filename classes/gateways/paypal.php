@@ -91,7 +91,7 @@ class paypal implements paymentGateways {
     $this->testMode($mode);
     $this->fields['business'] = elgg_get_plugin_user_setting('paypal_account', $user_guid, GLOBAL_IZAP_PAYMENT_PLUGIN);
     $imagepath = elgg_get_site_url().'mod/izap-payment-gateways/_graphics/paypal.png';
-    c($this->fields); exit;
+    
     echo "<html>\n";
     echo "<head><title>Processing Payment...</title>";
     echo "</head>\n";
