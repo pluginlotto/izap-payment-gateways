@@ -80,6 +80,7 @@ class paypal implements paymentGateways {
   }
 
   function submit($user_guid = 0) {
+    
     if(!$user_guid) {
       $user_guid = elgg_get_logged_in_user_guid();
     }
@@ -90,6 +91,7 @@ class paypal implements paymentGateways {
     $this->testMode($mode);
     $this->fields['business'] = elgg_get_plugin_user_setting('paypal_account', $user_guid, GLOBAL_IZAP_PAYMENT_PLUGIN);
     $imagepath = elgg_get_site_url().'mod/izap-payment-gateways/_graphics/paypal.png';
+    c($this->fields); exit;
     echo "<html>\n";
     echo "<head><title>Processing Payment...</title>";
     echo "</head>\n";
@@ -99,6 +101,7 @@ class paypal implements paymentGateways {
       </p>";
     echo "<form method=\"post\" name=\"form\" action=\"".$this->paypal_url."\">\n";
 
+    
     foreach ($this->fields as $name => $value) {
       echo "<input type=\"hidden\" name=\"$name\" value=\"$value\">\n";
     }
