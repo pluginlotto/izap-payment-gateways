@@ -34,7 +34,7 @@ function izap_payments_init() {
   include_once(dirname(__FILE__) . '/lib/functions/core.php');
 
   $actions_arr = array(
-      'admin' => array(
+      'logged_in' => array(
           GLOBAL_IZAP_PAYMENT_ACTION . '/choose_gateway' => "choose_gateway.php"
       ));
   foreach ($actions_arr as $access_id => $actions) {
@@ -53,14 +53,16 @@ function izap_payments_init() {
         if (isset($options['public']) && $options['public'] == TRUE && !elgg_is_logged_in()) {
           continue;
         } else if (isset($options['admin_only']) && $options['admin_only'] == true && !elgg_is_admin_logged_in()) {
+          
+          elgg_register_menu_item('page', array(
+          'name'=>elgg_echo($options['title']),
+          'text'=>elgg_echo($options['title']),
+          'href'=>$url,
+          'section'=>$options['groupby']
+        ));
           continue;
         } else {
-          elgg_register_menu_item('page', array(
-              'name' => elgg_echo($options['title']),
-              'text' => elgg_echo($options['title']),
-              'href' => $url,
-              'section' => $options['groupby']
-          ));
+          
         }
       }
     }
