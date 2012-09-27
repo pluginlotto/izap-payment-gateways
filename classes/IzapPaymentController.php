@@ -9,6 +9,12 @@ class IzapPaymentController extends IzapController {
   }
   public function actionChoose_gateway() {
     admin_gatekeeper();
+    echo "Sona";
+    echo elgg_get_plugin_setting('global_payment_gateway');
+    if (elgg_get_plugin_setting('global_payment_gateway') == 'yes') {
+      register_error("Sorry this link is not authorized to access.");
+      forward();
+    }
     set_context('settings');
     $this->page_elements['title'] = elgg_echo('izap_payment:choose_gateway');
     $this->page_elements['content'] = elgg_view( GLOBAL_IZAP_PAYMENT_PLUGIN . '/forms/choose_gateway' );
