@@ -30,6 +30,6 @@ foreach($posted_values as $key => $value) {
     );
   }
 }
-system_message(elgg_echo('settings_saved'));
+system_message(elgg_echo('settings saved'));
 forward($_SERVER['HTTP_REFERER']);
 exit;
